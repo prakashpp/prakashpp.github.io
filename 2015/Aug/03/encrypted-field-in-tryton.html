@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Encrypted Field in Tryton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="author" content="Prakash Pandey">
+<meta name="tags" content="python, tryton, erp, encryption, "/>
+<meta name="date" content="03 Aug 2015"/>
+<meta name="category" content="introduction"/>
+<meta name="summary" content="<p>Tryton EncryptedField implementation and example</p>>
+    <link href="http://prakashpandey.in/theme/css/fonts.css" rel="stylesheet">
+    <link href="http://prakashpandey.in/theme/css/milk.min.css" rel="stylesheet">
+    <link href="http://prakashpandey.in/theme/css/milk-responsive.min.css" rel="stylesheet">
+    <link href="http://prakashpandey.in/theme/css/style.css" rel="stylesheet">
+    <link href="http://prakashpandey.in/theme/css/highlight.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div id="navbar-inner">
+        <div id="logo">
+          <a href="/">Prakash Pandey</a>
+          <img class="img-circle" src="https://secure.gravatar.com/avatar/a153aa8e81b37f14ef1016672c2fd22a?s=64">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <div class="row-fluid">
+          <div class="span12">
+
+<article class="post">
+	<header>
+     	<h1><a href="2015/Aug/03/encrypted-field-in-tryton.html">Encrypted Field in Tryton</a></h1>
+        <time datetime="2015-08-03T10:20:00+02:00" pubdate>03 Aug 2015</time>
+    </header>
+    <hr>
+    <div class="content">
+    	<p>Sometimes your tryton model contains sensitive information e.g. SSN, which you wanted to store securely. <a href="https://github.com/fulfilio/trytond-encrypted-field">Trytond-encrypted-fields</a> introduces a field wrapper like function field which applies symmetric key encryption approach to encrypt your data. With first version it can encrypt char, text and selection fields.</p>
+<h1>How it works?</h1>
+<p>It uses AES in CBC mode with a 128-bit key for encryption. Key is taken either from tryton configuration or environment variable. Values are encrypted in database and decrypted when carried through tryton. You cannot search (except checking for None values) in encrypted fields because it's not a deterministic encryption: that the same value encrypted twice gives the same output.</p>
+<h1>Yes I want to encrypt</h1>
+<p>I use this for storing social security numbers. To begin, first you will have to install this module:</p>
+<div class="highlight"><pre><span class="nv">$ </span>pip install trytond_encryption_field
+</pre></div>
+
+
+<p>Now generate a secret key:</p>
+<div class="highlight"><pre><span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">9</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">10</span> <span class="mi">2015</span><span class="p">,</span> <span class="mo">03</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">08</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span> <span class="n">Compatible</span> <span class="n">Apple</span> <span class="n">LLVM</span> <span class="mf">6.0</span> <span class="p">(</span><span class="n">clang</span><span class="o">-</span><span class="mf">600.0</span><span class="o">.</span><span class="mi">56</span><span class="p">)]</span> <span class="n">on</span> <span class="n">darwin</span>
+<span class="n">Type</span> <span class="s">&quot;help&quot;</span><span class="p">,</span> <span class="s">&quot;copyright&quot;</span><span class="p">,</span> <span class="s">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="kn">import</span> <span class="n">Fernet</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+<span class="s">&#39;9phGLSb7FTAWIAGp0BE_CAg2xFFFpbBa4AqFejMoClI=&#39;</span>
+</pre></div>
+
+
+<p>Store this secret key in <em>TRYTOND_ENCRYPTED_FIELD__SECRET_KEY</em> or in tryton configuration under <em>encrypted_field</em> section as below:</p>
+<div class="highlight"><pre><span class="k">[encrypted_field]</span>
+<span class="na">secret_key</span> <span class="o">=</span> <span class="s">9phGLSb7FTAWIAGp0BE_CAg2xFFFpbBa4AqFejMoClI=</span>
+</pre></div>
+
+
+<p>You are done with the configuration, let implement encrytped SSN field in <em>party.party</em> model:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">trytond.model</span> <span class="kn">import</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">trytond_encrypted_field</span> <span class="kn">import</span> <span class="n">EncryptedField</span>
+
+<span class="k">class</span> <span class="nc">Party</span><span class="p">:</span>
+  <span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;party.party&#39;</span>
+
+  <span class="n">ssn</span> <span class="o">=</span> <span class="n">EncryptedField</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">(</span><span class="s">&#39;SSN&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>That's it! Add it to view and start saving SSN :-)</p>
+<p>Module is still in early state and provides very minimum functionality. If you want to contribute or report bugs please create issue/PR on <a href="https://github.com/fulfilio/trytond-encrypted-field">Github</a>.</p>
+    </div>
+</article>
+
+          </div>
+        </div>
+        <footer>
+          <a class="twitter-follow-button" href="https://twitter.com/prkshpp">Follow @prkshpp</a>
+          <a href="mailto:howdy@prakashpandey.in" class="contact">Get in Touch</a>
+        </footer>
+      </div>
+    </div>
+    <script src="http://prakashpandey.in/theme/js/highlight.js"></script>
+    <script src="http://prakashpandey.in/theme/js/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('div.highlight pre').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+      });
+    </script>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-65626172-1', 'auto');
+          ga('send', 'pageview');
+    </script>
+  </body>
+</html>
