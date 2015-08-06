@@ -36,7 +36,65 @@
     </header>
     <hr>
     <div class="content">
-    	
+    	<p>Few days back I was searching for a load testing library in python. Actually I wanted
+to test on how many concurrent user my WSGI application can handle. I came across this tool
+locust, found very useful in my case. Well documented and very good extensible api.</p>
+<h1>So what is Locust?</h1>
+<p>As per documentation "Locust is an easy-to-use, distributed, user load testing tool.
+Intended for load testing web sites (or other systems) and figuring out how many concurrent
+users a system can handle." It comes with a very good command line and web interface.
+You can define taskset - what a user gonna do with the system and locust can swarm your
+system with concurrent users doing the task.</p>
+<h1>How did I tested?</h1>
+<p>Locust can be installed from pypi:</p>
+<div class="highlight"><pre><span class="nv">$ </span>pip install locustio
+</pre></div>
+
+
+<p>I had a WSGI application running on <code>localhost:5000</code> and a locustfile as:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">locust</span> <span class="kn">import</span> <span class="n">HttpLocust</span><span class="p">,</span> <span class="n">TaskSet</span><span class="p">,</span> <span class="n">task</span>
+
+
+<span class="k">class</span> <span class="nc">Tasks</span><span class="p">(</span><span class="n">TaskSet</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">on_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; on_start is called when a Locust start before any task is scheduled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/database&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;common.db.login&quot;</span><span class="p">,</span> <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;admin&quot;</span><span class="p">,</span> <span class="s">&#39;admin&#39;</span><span class="p">]</span>
+        <span class="p">}),</span> <span class="n">catch_response</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;result&#39;</span><span class="p">]:</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">failure</span><span class="p">(</span><span class="s">&quot;Not able to login&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+
+    <span class="nd">@task</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/database&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s">&#39;method&#39;</span><span class="p">:</span> <span class="s">&#39;model.party.party.search&#39;</span><span class="p">,</span>
+                <span class="s">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="p">[[]]]</span>
+        <span class="p">}),</span> <span class="n">catch_response</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">HttpLocust</span><span class="p">):</span>
+    <span class="n">task_set</span> <span class="o">=</span> <span class="n">Tasks</span>
+    <span class="n">min_wait</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="n">max_wait</span> <span class="o">=</span> <span class="mi">15000</span>
+</pre></div>
+
+
+<p>started locust with <code>locust --host=http://localhost:5000</code>:</p>
+<p><img alt="Locust Web Interface" src="http://prakashpandey.in/images/Screenshot-2015-08-06-17.38.03.png" /></p>
+<p>Opened locust's web interface on browser (<code>localhost:8069</code>) and simulated load from there.</p>
+<h1>Conclusion</h1>
+<p>Locust is awesome. It can be easily blended with python unittest or pytest. Now I am planning to explore it
+more and add locustfile to my WSGI application tests :)</p>
     </div>
 </article>
 
