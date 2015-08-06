@@ -44,7 +44,7 @@ hello-world
 
 
 &lt;h1&gt;Writing models&lt;/h1&gt;
-&lt;p&gt;Lets create a new model HelloWorld which has a char field name.&lt;/p&gt;
+&lt;p&gt;Lets create a new model &lt;code&gt;HelloWorld&lt;/code&gt; which has a char field name.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#! /usr/bin/env python&lt;/span&gt;
 &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;    helloworld.py&lt;/span&gt;
@@ -70,7 +70,7 @@ tryton models.&lt;/p&gt;
 &lt;p&gt;Views are written in xml and are stored in database. Tryton has models
 for view e.g. &lt;code&gt;ir.ui.view&lt;/code&gt;, creating a view is creating a record of this
 model. Same goes for action window and menuitems.&lt;/p&gt;
-&lt;p&gt;Lets create form view and list view for HelloWorld model, &lt;code&gt;helloworld.xml&lt;/code&gt;
+&lt;p&gt;Lets create form view and list view for &lt;code&gt;HelloWorld&lt;/code&gt; model, &lt;code&gt;helloworld.xml&lt;/code&gt;
 will look like as follows:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;tryton&amp;gt;&lt;/span&gt;
