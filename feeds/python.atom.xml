@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/python.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-08-06T10:56:00+02:00</updated><entry><title>Load testing with Locust</title><link href="http://prakashpandey.in/2015/Aug/06/load-testing-with-locust.html" rel="alternate"></link><updated>2015-08-06T10:56:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-06:2015/Aug/06/load-testing-with-locust.html</id><summary type="html">&lt;p&gt;Few days back I was searching for a load testing library in python. Actually I wanted
 to test on how many concurrent user my WSGI application can handle. I came across this tool
-locust, found very useful in my case. Well documented and very good extensible api.&lt;/p&gt;
+&lt;a href="http://locust.io/"&gt;locust&lt;/a&gt;, found very useful in my case. Well documented and very good extensible api.&lt;/p&gt;
 &lt;h1&gt;So what is Locust?&lt;/h1&gt;
-&lt;p&gt;As per documentation "Locust is an easy-to-use, distributed, user load testing tool.
-Intended for load testing web sites (or other systems) and figuring out how many concurrent
-users a system can handle." It comes with a very good command line and web interface.
+&lt;p&gt;As per locust documentation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Locust is an easy-to-use, distributed, user load testing tool.
+Intended for load testing web sites (or other systems) and figuring
+out how many concurrent users a system can handle.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It comes with a very good command line and web interface.
 You can define taskset - what a user gonna do with the system and locust can swarm your
 system with concurrent users doing the task.&lt;/p&gt;
 &lt;h1&gt;How did I tested?&lt;/h1&gt;
