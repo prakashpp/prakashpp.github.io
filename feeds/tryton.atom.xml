@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/tryton.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-08-06T23:26:00+02:00</updated><entry><title>Writing your first Tryton module</title><link href="http://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html" rel="alternate"></link><updated>2015-08-06T23:26:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-06:2015/Aug/06/writing-your-first-tryton-module.html</id><summary type="html">&lt;p&gt;to extend/change the existing functionality by writing
-your own module. Every tryton module is a python package also.
-This blog explains on how to write a tryton module.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://tryton.org"&gt;Tryton&lt;/a&gt; is a modular business application, allows you
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/tryton.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-08-06T23:26:00+02:00</updated><entry><title>Writing your first Tryton module</title><link href="http://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html" rel="alternate"></link><updated>2015-08-06T23:26:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-06:2015/Aug/06/writing-your-first-tryton-module.html</id><summary type="html">&lt;p&gt;&lt;a href="http://tryton.org"&gt;Tryton&lt;/a&gt; is a modular business application, allows you
 to extend/change the existing functionality by writing
 your own module. Every tryton module is a python package also.
 This blog explains on how to write a tryton module.&lt;/p&gt;
