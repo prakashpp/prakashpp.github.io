@@ -1,5 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/all.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-08-06T23:26:00+02:00</updated><entry><title>Writing your first Tryton module</title><link href="http://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html" rel="alternate"></link><updated>2015-08-06T23:26:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-06:2015/Aug/06/writing-your-first-tryton-module.html</id><summary type="html">&lt;p&gt;&lt;a href="http://tryton.org"&gt;Tryton&lt;/a&gt; is a modular business application, allows you
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/all.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-08-13T02:02:00+02:00</updated><entry><title>Access SOAP web services using python suds</title><link href="http://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html" rel="alternate"></link><updated>2015-08-13T02:02:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-13:2015/Aug/13/access-soap-web-services-using-python-suds.html</id><summary type="html">&lt;p&gt;Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on &lt;a href="https://github.com/fulfilio/py-fedex"&gt;py-fedex&lt;/a&gt; api just because it was getting hard to maintain and my lack of knowledge on python SOAP client libraries. Library I used for SOAP request and response was &lt;a href="https://fedorahosted.org/suds"&gt;suds&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Why suds?&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Most popular SOAP client library in python world!&lt;/li&gt;
+&lt;li&gt;Its newer and pythonic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most people recommend suds and you would find code references easily. You can install it directly from pypi:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install suds
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;How commuication happens with SOAP?&lt;/h1&gt;
+&lt;p&gt;Every web service which communicates through SOAP exposes a &lt;a href="https://en.wikipedia.org/wiki/Web_Services_Description_Language"&gt;WSDL&lt;/a&gt;. WSDL is a document that describes a Web service and also tells you how to access and use its methods. Commuication happens over HTTP and request/response content is XML.
+This XML should be valid as per WSDL.&lt;/p&gt;
+&lt;h1&gt;An Example!&lt;/h1&gt;
+&lt;p&gt;Let's say we want to communicate a SOAP based web service &lt;a href="http://www.webservicex.net/geoipservice.asmx"&gt;geoip&lt;/a&gt;. WSDL is available at &lt;a href="http://www.webservicex.net/geoipservice.asmx?WSDL"&gt;http://www.webservicex.net/geoipservice.asmx?WSDL&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First initialize suds client and print it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Client&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://www.webservicex.net/geoipservice.asmx?WSDL&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print client
+
+Suds &lt;span class="o"&gt;(&lt;/span&gt; https://fedorahosted.org/suds/ &lt;span class="o"&gt;)&lt;/span&gt;  version: 0.4 GA  build: R699-20100913
+
+Service &lt;span class="o"&gt;(&lt;/span&gt; GeoIPService &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;tns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://www.webservicex.net/&amp;quot;&lt;/span&gt;
+   Prefixes &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;ns0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://www.webservicex.net/&amp;quot;&lt;/span&gt;
+   Ports &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt;:
+      &lt;span class="o"&gt;(&lt;/span&gt;GeoIPServiceSoap&lt;span class="o"&gt;)&lt;/span&gt;
+         Methods &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt;:
+            GetGeoIP&lt;span class="o"&gt;(&lt;/span&gt;xs:string IPAddress, &lt;span class="o"&gt;)&lt;/span&gt;
+            GetGeoIPContext&lt;span class="o"&gt;()&lt;/span&gt;
+         Types &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;:
+            GeoIP
+      &lt;span class="o"&gt;(&lt;/span&gt;GeoIPServiceSoap12&lt;span class="o"&gt;)&lt;/span&gt;
+         Methods &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt;:
+            GetGeoIP&lt;span class="o"&gt;(&lt;/span&gt;xs:string IPAddress, &lt;span class="o"&gt;)&lt;/span&gt;
+            GetGeoIPContext&lt;span class="o"&gt;()&lt;/span&gt;
+         Types &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;:
+            GeoIP
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It shows the available services, ports, methods and types. There are two ports: &lt;code&gt;GeoIPServiceSoap&lt;/code&gt; and &lt;code&gt;GeoIPServiceSoap12&lt;/code&gt;. Method  &lt;code&gt;GetGeoIP&lt;/code&gt; has IPAddress parameter of string type. Lets make a request for IP &lt;code&gt;8.8.8.8&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="c"&gt;# Set client&amp;#39;s port if there are multiple ports available.&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; client.set_options&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GeoIPServiceSoap&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; client.service.GetGeoIP&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;IPAddress&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;8.8.8.8&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print response
+&lt;span class="o"&gt;(&lt;/span&gt;GeoIP&lt;span class="o"&gt;){&lt;/span&gt;
+   &lt;span class="nv"&gt;ReturnCode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
+   &lt;span class="nv"&gt;IP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;8.8.8.8&amp;quot;&lt;/span&gt;
+   &lt;span class="nv"&gt;ReturnCodeDetails&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Success&amp;quot;&lt;/span&gt;
+   &lt;span class="nv"&gt;CountryName&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;United States&amp;quot;&lt;/span&gt;
+   &lt;span class="nv"&gt;CountryCode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;USA&amp;quot;&lt;/span&gt;
+ &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Response object is GeoIP type and you can access attributes using dot notation.&lt;/p&gt;
+&lt;h1&gt;Debugging&lt;/h1&gt;
+&lt;p&gt;You can debug all the requests by enabling logger as follows, it will show you the exact request/response in xml format.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;basicConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;suds.client&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;This blog explains the basics how to interact with SOAP using suds. There are complex requests, authentication etc. and suds one page documentation clearly explains those in detail.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fedorahosted.org/suds/wiki/Documentation"&gt;Suds Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="SOAP"></category><category term="python"></category><category term="suds"></category></entry><entry><title>Writing your first Tryton module</title><link href="http://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html" rel="alternate"></link><updated>2015-08-06T23:26:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-08-06:2015/Aug/06/writing-your-first-tryton-module.html</id><summary type="html">&lt;p&gt;&lt;a href="http://tryton.org"&gt;Tryton&lt;/a&gt; is a modular business application, allows you
 to extend/change the existing functionality by writing
 your own module. Every tryton module is a python package also.
 This blog explains on how to write a tryton module.&lt;/p&gt;
