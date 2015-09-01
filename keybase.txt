@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/prakashpandey
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://prakashpandey.in
+  * I am prakashpandey (https://keybase.io/prakashpandey) on keybase.
+  * I have a public key with fingerprint F383 E183 ACAF 56DA 33B7  F7AE 630F 74FE F11B 1198
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "f383e183acaf56da33b7f7ae630f74fef11b1198",
+            "host": "keybase.io",
+            "key_id": "630f74fef11b1198",
+            "kid": "0101dc8e71962cb063aa8bb9e52a31e635507ae66e3424d33d10976dda3b03c28b130a",
+            "uid": "05d666129616438d66237c180c961319",
+            "username": "prakashpandey"
+        },
+        "revoke": {
+            "sig_ids": [
+                "455281465debbae64138d9aa9eb7a448f67d6b56d14c11d99e136cb928c911530f"
+            ]
+        },
+        "service": {
+            "hostname": "prakashpandey.in",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1441106336,
+    "expire_in": 157680000,
+    "prev": "3c621d7b8453a4a3c339992429bfbe79c1484cc9f9e6bf16590dbf304569f0cf",
+    "seqno": 7,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Comment: GPGTools - https://gpgtools.org
+
+owFtkl1oHUUYhk9aY9oDMVpsojRVmBtJOaQ7O7OzO4eIMdCaoxCatl6IhJOZ2dmc
+5SS7m92TP2OkelHSaMEEjJVCQ2lKLMYbE0jwog1iaVUI/rRGIjQ1ohCE/JQ0xRYT
+Z6O9694M8807z/d+786HpTsTySJRVthc2/fUmaLvlnji9T9OjfcC7ts9IN0L8nJ7
+cVyvRYZB6HoFkAYOspCEFmKCOQaxGULcdEwmCdIcEzvSgZBDSC2QAjk/im8oDGeR
+rHZ9VVObrGur6iP0+e0DDWrQFpY0ISW64BpBjFmcU2noDEHVxzC0uB+RCOvYRsiG
+GjWJraxwDQnd4hBpTOE6/sMZNiEE6pRAgpGlNjoyBbQ0oSoI0lgYydBjbVKpg5Dl
+WZQLmGer4ftSIJSdfl7GMURui3IegfSbABuGbkFMDFtyrqxgqMCUMSq5yTC2HGLa
+hKt0IBYQ2pRKiIjgVLcEhdBQk4MmxVZtO12xDY+jepSFatdTBoPQL/jCb1WnuUIh
+SMfGCj1BrO6SPPs/J8tdz1b/Sl3olGHk+h5IQ6UUBTcGQ4whVGkikgKyO3BDmXVj
+hWESS1NfCjiBmlYxkSA6tE1uYQMxzJBAiFKqY51yh0uTCogtLAR1qCTcgcSgms0d
+pGGDUEcTDohHa/d8kDaVT9aikCo8jxU6Qgn6kqeKKh9LFCUTjxfviN9bIrn7yYeP
+sKazZMtj2vw3udJn2kb3biTbP12Q4fLmg/XVgdb+E3Nl6QupuqbUsb/mM0+cPfnZ
+vqXx2W7tnfWauxcPTUxoJQduX/r58K9X3705vLNvevLe6pm3vz58zcFTZ83LA8/O
+ZQJvoef9rrpz5c99vtB8Y2x5sH7gpfkqUtIWfH+l9Ify6R0VKw2zLw7dfvXbDEts
+VV9/vmQlinKztf2b491jv1Qu/zP0VePpXRvvfVT+W2OmvWHwXO3M8f1y5MT9lYGZ
+pUVzbGTqhcXX6maGf8zWHx1smnxrbOTj7skvvnxj7ZPl0Yt3Mgfp+SN/jo7UD+7p
+/+n8afF7/lbtB6803Dp57OW/y8qbq+zrFXNPF68O/ws=
+=KGjq
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/prakashpandey
+
+==================================================================
+
