@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>HTTP mocking was never easy before</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Prakash Pandey">
+
+<meta name="tags" content="mock, python, api, "/>
+<meta name="date" content="17 Feb 2017"/>
+<meta name="category" content="python"/>
+<meta name="summary" content="Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses..."/>
+<meta name="description" content="Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses..."/>
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses...">
+<meta name="twitter:site" content="@prkshpp">
+<meta name="twitter:title" content="HTTP mocking was never easy before">
+<meta name="twitter:description" content="Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses...">
+<meta name="twitter:creator" content="@prkshpp">
+<meta name="twitter:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="HTTP mocking was never easy before"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:url" content="https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html"/>
+<meta property="og:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" />
+<meta property="og:description" content="Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses..." />
+<meta property="og:site_name" content="Prakash Pandey" />
+
+        <link rel="shortcut icon" href="https://prakashpandey.in/theme/img/favicon.ico">
+        <link href="https://prakashpandey.in/theme/css/screen.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/font.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/highlight.css" rel="stylesheet">
+    </head>
+
+    <body class="post-template">
+
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <a class="blog-logo" href="/"><img src="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" height="120" width="120" alt="Blog Logo" />
+            </a>
+        </header>
+
+
+            <span class="post-meta"><time datetime="2017-02-17T10:39:00+01:00">17 Feb 2017</time> on <a href="tag/mock.html">mock</a>, <a href="tag/python.html">python</a>, <a href="tag/api.html">api</a>, </span>
+
+            <h1 class="post-title">HTTP mocking was never easy before</h1>
+
+            <section class="post-content">
+            	<p>Everytime I worked on api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like <a href="https://github.com/getsentry/responses">responses</a> makes it easy but works only for requests. I was looking for something which can streamline http mock and works with both requests and urllib.</p>
+<p>Finally found something which fits the need - <a href="https://github.com/kevin1024/vcrpy">vcrpy</a>. Allows you to record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests. It's a port of ruby vcr project.</p>
+<p><img alt="vcrpy" src="https://prakashpandey.in/images/vcrpy.png" /></p>
+<p>Concept is pretty simple, vcrpy records cassette(actual request/response dumped to a yaml file) during first run and then uses it from the next run.</p>
+<h1>Quick Example?</h1>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">vcr</span>
+
+<span class="nd">@vcr.use_cassette</span><span class="p">(</span><span class="s">&#39;fixtures/vcr_cassettes/weather.yaml&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_weather</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test weather api.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;http://samples.openweathermap.org/data/2.5/weather?q=London,uk&amp;appid=b1b15e88fa797225412429c1c50c122a1&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Run the test and you will see it has recorded cassette to <code>fixtures/vcr_cassettes/weather.yaml</code>, something like this -</p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">interactions</span><span class="p-Indicator">:</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">request</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">body</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
+    <span class="l-Scalar-Plain">headers</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">Connection</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">close</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">Host</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">samples.openweathermap.org</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">User-Agent</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">Python-urllib/2.7</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">method</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GET</span>
+    <span class="l-Scalar-Plain">uri</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://samples.openweathermap.org/data/2.5/weather?q=London,uk&amp;appid=b1b15e88fa797225412429c1c50c122a1</span>
+  <span class="l-Scalar-Plain">response</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">body</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span><span class="nv">string</span><span class="p-Indicator">:</span> <span class="kt">!!python/unicode</span> <span class="s">&#39;{&quot;coord&quot;:{&quot;lon&quot;:-0.13,&quot;lat&quot;:51.51},&quot;weather&quot;:[{&quot;id&quot;:300,&quot;main&quot;:&quot;Drizzle&quot;,&quot;description&quot;:&quot;light</span>
+        <span class="s">intensity</span><span class="nv"> </span><span class="s">drizzle&quot;,&quot;icon&quot;:&quot;09d&quot;}],&quot;base&quot;:&quot;stations&quot;,&quot;main&quot;:{&quot;temp&quot;:280.32,&quot;pressure&quot;:1012,&quot;humidity&quot;:81,&quot;temp_min&quot;:279.15,&quot;temp_max&quot;:281.15},&quot;visibility&quot;:10000,&quot;wind&quot;:{&quot;speed&quot;:4.1,&quot;deg&quot;:80},&quot;clouds&quot;:{&quot;all&quot;:90},&quot;dt&quot;:1485789600,&quot;sys&quot;:{&quot;type&quot;:1,&quot;id&quot;:5091,&quot;message&quot;:0.0103,&quot;country&quot;:&quot;GB&quot;,&quot;sunrise&quot;:1485762037,&quot;sunset&quot;:1485794875},&quot;id&quot;:2643743,&quot;name&quot;:&quot;London&quot;,&quot;cod&quot;:200}&#39;</span><span class="p-Indicator">}</span>
+    <span class="l-Scalar-Plain">headers</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">cache-control</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;max-age=0,</span><span class="nv"> </span><span class="s">private,</span><span class="nv"> </span><span class="s">must-revalidate&#39;</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">connection</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">close</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">content-type</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">application/json; charset=utf-8</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">date</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;Fri,</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">Feb</span><span class="nv"> </span><span class="s">2017</span><span class="nv"> </span><span class="s">05:30:56</span><span class="nv"> </span><span class="s">GMT&#39;</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">etag</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">W/&quot;e70c27085ed41de5321252b16c9582fe&quot;</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">server</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">openresty/1.9.7.1</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">x-content-type-options</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">nosniff</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">x-frame-options</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">SAMEORIGIN</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">x-request-id</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">c38b25a2-3216-493a-a754-3813acb66765</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">x-runtime</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;0.003599&#39;</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">x-xss-protection</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">1; mode=block</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">status</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span><span class="nv">code</span><span class="p-Indicator">:</span> <span class="nv">200</span><span class="p-Indicator">,</span> <span class="nv">message</span><span class="p-Indicator">:</span> <span class="nv">OK</span><span class="p-Indicator">}</span>
+<span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+</pre></div>
+
+
+<p>And you are done! Run the test again, it wont hit the api server ;-)</p>
+<h1>Conclusion</h1>
+<p>vcrpy is in active development and lot of new features are coming in. It has made HTTP mocking easier for me. There are lot more advanced features like implementing your own request matcher, hiding sensitive data from request/response etc. For further reading go to the <a href="https://vcrpy.readthedocs.io/en/latest">vcrpy documentation</a></p>
+            </section>
+
+            <footer class="post-footer">
+
+                <section class="author">
+                    <h4>Prakash Pandey</h4>
+                    <p>Engineer @ Fulfil.IO Inc.</p>
+                    <ul class="author-meta clearfix">
+                        <li>New Delhi, India</li>
+                        <li><a href="https://fulfil.io">https://fulfil.io</a></li>
+                    </ul>
+                </section>
+
+                <section class="share">
+                    <h4>Share this post</h4>
+                    <a class="icon-twitter" href="https://twitter.com/share?text=HTTP mocking was never easy before&amp;url=https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html"
+                        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                        <span class="hidden">Twitter</span>
+                    </a>
+                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html"
+                        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                        <span class="hidden">Facebook</span>
+                    </a>
+                    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html"
+                       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                        <span class="hidden">Google+</span>
+                    </a>
+                </section>
+
+            </footer>
+
+
+    </article>
+
+</main>
+
+
+            <footer class="site-footer">
+                <a class="subscribe icon-feed" href="https://prakashpandey.in/feeds/all.atom.xml"><span class="tooltip">Subscribe!</span></a>
+                <div class="inner">
+                     <section class="poweredby">Powered by <a href="https://blog.getpelican.com/">Pelican</a></section>
+                </div>
+            </footer>
+
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.min.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.fitvids.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/index.js"></script>
+            <script>
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                  ga('create', 'UA-65626172-1', 'auto');
+                  ga('send', 'pageview');
+            </script>
+
+<script type="text/javascript" src="https://prakashpandey.in/theme/js/highlight.js"></script>
+<script>
+  $(document).ready(function() {
+    $('div.highlight pre').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "HTTP mocking was never easy before",
+  "headline": "HTTP mocking was never easy before",
+  "datePublished": "2017-02-17 10:39:00+01:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Prakash Pandey",
+    "url": "https://prakashpandey.in"
+  },
+  "image": "https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0",
+  "url": "https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html",
+  "description": "Everytime I worked with api related stuff, testing became nightmare. Tried multiple mock libraries and they all took decent amount of time to make it work. Some libraries like responses..."
+}
+</script>
+    </body>
+</html>

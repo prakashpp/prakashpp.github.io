@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Dockerize wkhtmltopdf HTTP service</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Prakash Pandey">
+
+<meta name="tags" content="wkhtmltopdf, nodejs, docker, "/>
+<meta name="date" content="13 Sep 2015"/>
+<meta name="category" content="nodejs"/>
+<meta name="summary" content="Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so..."/>
+<meta name="description" content="Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so..."/>
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so...">
+<meta name="twitter:site" content="@prkshpp">
+<meta name="twitter:title" content="Dockerize wkhtmltopdf HTTP service">
+<meta name="twitter:description" content="Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so...">
+<meta name="twitter:creator" content="@prkshpp">
+<meta name="twitter:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Dockerize wkhtmltopdf HTTP service"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:url" content="https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html"/>
+<meta property="og:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" />
+<meta property="og:description" content="Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so..." />
+<meta property="og:site_name" content="Prakash Pandey" />
+
+        <link rel="shortcut icon" href="https://prakashpandey.in/theme/img/favicon.ico">
+        <link href="https://prakashpandey.in/theme/css/screen.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/font.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/highlight.css" rel="stylesheet">
+    </head>
+
+    <body class="post-template">
+
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <a class="blog-logo" href="/"><img src="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" height="120" width="120" alt="Blog Logo" />
+            </a>
+        </header>
+
+
+            <span class="post-meta"><time datetime="2015-09-13T13:00:00+02:00">13 Sep 2015</time> on <a href="tag/wkhtmltopdf.html">wkhtmltopdf</a>, <a href="tag/nodejs.html">nodejs</a>, <a href="tag/docker.html">docker</a>, </span>
+
+            <h1 class="post-title">Dockerize wkhtmltopdf HTTP service</h1>
+
+            <section class="post-content">
+            	<p>Converting html documents to pdf is very common. Most popular command line tool to do so is <a href="http://wkhtmltopdf.org/">wkhtmltopdf</a>. As per wkhtmltopdf website:</p>
+<blockquote>
+<p>wkhtmltopdf and wkhtmltoimage are open source (LGPLv3) command line tools to render
+HTML into PDF and various image formats using the Qt WebKit rendering engine. These
+run entirely "headless" and do not require a display or display service.</p>
+</blockquote>
+<h1>wkhtmltopdf http service</h1>
+<p>I used node.js, wkhtmltopdf and docker to achieve so. Source code is in <a href="https://github.com/prakashpp/wkhtmltopdf-docker-http">github</a>. Clone this repo and build the docker image and run it in daemon mode.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker build -t wkhtmltopdf-http-service .
+<span class="nv">$ </span>docker run -d -p 5001:5001 wkhtmltopdf-http-service
+</pre></div>
+
+
+<p>Thats it! Convertor is running on <code>http://127.0.0.1:5001</code></p>
+<h1>How to convert?</h1>
+<p>POST request to / returns you the converted pdf. POST data must include the <code>html</code> parameter.</p>
+<div class="highlight"><pre><span class="nv">$ </span>curl --data <span class="s2">&quot;html=&lt;h1&gt;Hello world&lt;/h1&gt;&quot;</span> http://127.0.0.1:5001
+</pre></div>
+
+
+<p>There are <a href="http://madalgo.au.dk/~jakobt/wkhtmltoxdoc/wkhtmltopdf_0.10.0_rc2-doc.html">many options</a> available to wkhtmltopdf. All of the command line options are supported as documented on the page linked to above. The options are camelCased instead-of-dashed as in the command line tool. You can pass these options to POST parameters as follows</p>
+<div class="highlight"><pre><span class="nv">$ </span>curl --data <span class="s2">&quot;html=&lt;h1&gt;Hello&lt;/h1&gt;&amp;marginLeft=100mm&quot;</span> http://127.0.0.1:5001
+</pre></div>
+
+
+<h1>Conclusion</h1>
+<p>Facing problems in using this? Create an issue on <a href="https://github.com/prakashpp/wkhtmltopdf-docker-http">github</a>.</p>
+            </section>
+
+            <footer class="post-footer">
+
+                <section class="author">
+                    <h4>Prakash Pandey</h4>
+                    <p>Engineer @ Fulfil.IO Inc.</p>
+                    <ul class="author-meta clearfix">
+                        <li>New Delhi, India</li>
+                        <li><a href="https://fulfil.io">https://fulfil.io</a></li>
+                    </ul>
+                </section>
+
+                <section class="share">
+                    <h4>Share this post</h4>
+                    <a class="icon-twitter" href="https://twitter.com/share?text=Dockerize wkhtmltopdf HTTP service&amp;url=https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html"
+                        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                        <span class="hidden">Twitter</span>
+                    </a>
+                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html"
+                        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                        <span class="hidden">Facebook</span>
+                    </a>
+                    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html"
+                       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                        <span class="hidden">Google+</span>
+                    </a>
+                </section>
+
+            </footer>
+
+
+    </article>
+
+</main>
+
+
+            <footer class="site-footer">
+                <a class="subscribe icon-feed" href="https://prakashpandey.in/feeds/all.atom.xml"><span class="tooltip">Subscribe!</span></a>
+                <div class="inner">
+                     <section class="poweredby">Powered by <a href="https://blog.getpelican.com/">Pelican</a></section>
+                </div>
+            </footer>
+
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.min.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.fitvids.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/index.js"></script>
+            <script>
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                  ga('create', 'UA-65626172-1', 'auto');
+                  ga('send', 'pageview');
+            </script>
+
+<script type="text/javascript" src="https://prakashpandey.in/theme/js/highlight.js"></script>
+<script>
+  $(document).ready(function() {
+    $('div.highlight pre').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Dockerize wkhtmltopdf HTTP service",
+  "headline": "Dockerize wkhtmltopdf HTTP service",
+  "datePublished": "2015-09-13 13:00:00+02:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Prakash Pandey",
+    "url": "https://prakashpandey.in"
+  },
+  "image": "https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0",
+  "url": "https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html",
+  "description": "Converting html documents to pdf is very common. Most popular command line tool to do so is wkhtmltopdf. I used node.js, wkhtmltopdf and docker to achieve so..."
+}
+</script>
+    </body>
+</html>

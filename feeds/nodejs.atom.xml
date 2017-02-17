@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/nodejs.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2015-09-13T13:00:00+02:00</updated><entry><title>Dockerize wkhtmltopdf HTTP service</title><link href="http://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html" rel="alternate"></link><updated>2015-09-13T13:00:00+02:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2015-09-13:2015/Sep/13/dockerize-wkhtmltopdf-http-service.html</id><summary type="html">&lt;p&gt;Converting html documents to pdf is very common. Most popular command line tool to do so is &lt;a href="http://wkhtmltopdf.org/"&gt;wkhtmltopdf&lt;/a&gt;. As per wkhtmltopdf website:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wkhtmltopdf and wkhtmltoimage are open source (LGPLv3) command line tools to render
+HTML into PDF and various image formats using the Qt WebKit rendering engine. These
+run entirely "headless" and do not require a display or display service.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;wkhtmltopdf http service&lt;/h1&gt;
+&lt;p&gt;I used node.js, wkhtmltopdf and docker to achieve so. Source code is in &lt;a href="https://github.com/prakashpp/wkhtmltopdf-docker-http"&gt;github&lt;/a&gt;. Clone this repo and build the docker image and run it in daemon mode.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;docker build -t wkhtmltopdf-http-service .
+&lt;span class="nv"&gt;$ &lt;/span&gt;docker run -d -p 5001:5001 wkhtmltopdf-http-service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Thats it! Convertor is running on &lt;code&gt;http://127.0.0.1:5001&lt;/code&gt;&lt;/p&gt;
+&lt;h1&gt;How to convert?&lt;/h1&gt;
+&lt;p&gt;POST request to / returns you the converted pdf. POST data must include the &lt;code&gt;html&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;curl --data &lt;span class="s2"&gt;&amp;quot;html=&amp;lt;h1&amp;gt;Hello world&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt; http://127.0.0.1:5001
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There are &lt;a href="http://madalgo.au.dk/~jakobt/wkhtmltoxdoc/wkhtmltopdf_0.10.0_rc2-doc.html"&gt;many options&lt;/a&gt; available to wkhtmltopdf. All of the command line options are supported as documented on the page linked to above. The options are camelCased instead-of-dashed as in the command line tool. You can pass these options to POST parameters as follows&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;curl --data &lt;span class="s2"&gt;&amp;quot;html=&amp;lt;h1&amp;gt;Hello&amp;lt;/h1&amp;gt;&amp;amp;marginLeft=100mm&amp;quot;&lt;/span&gt; http://127.0.0.1:5001
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Facing problems in using this? Create an issue on &lt;a href="https://github.com/prakashpp/wkhtmltopdf-docker-http"&gt;github&lt;/a&gt;.&lt;/p&gt;</summary><category term="wkhtmltopdf"></category><category term="nodejs"></category><category term="docker"></category></entry></feed>

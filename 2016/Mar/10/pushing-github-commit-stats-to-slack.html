@@ -4,30 +4,30 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <title>Hello World!</title>
+        <title>Pushing github commit stats to slack</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="Prakash Pandey">
 
-<meta name="tags" content="prakash, "/>
-<meta name="date" content="31 Jul 2015"/>
-<meta name="category" content="introduction"/>
-<meta name="summary" content="Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source..."/>
-<meta name="description" content="Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source..."/>
+<meta name="tags" content="github, slack, git, python, "/>
+<meta name="date" content="10 Mar 2016"/>
+<meta name="category" content="slack"/>
+<meta name="summary" content="It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github..."/>
+<meta name="description" content="It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github..."/>
 
 <!-- Twitter Card data -->
-<meta name="twitter:card" content="Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source...">
+<meta name="twitter:card" content="It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github...">
 <meta name="twitter:site" content="@prkshpp">
-<meta name="twitter:title" content="Hello World!">
-<meta name="twitter:description" content="Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source...">
+<meta name="twitter:title" content="Pushing github commit stats to slack">
+<meta name="twitter:description" content="It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github...">
 <meta name="twitter:creator" content="@prkshpp">
 <meta name="twitter:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0">
 
 <!-- Open Graph data -->
-<meta property="og:title" content="Hello World!"/>
+<meta property="og:title" content="Pushing github commit stats to slack"/>
 <meta property="og:type" content="blog"/>
-<meta property="og:url" content="https://prakashpandey.in/2015/Jul/31/hello-world.html"/>
+<meta property="og:url" content="https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html"/>
 <meta property="og:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" />
-<meta property="og:description" content="Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source..." />
+<meta property="og:description" content="It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github..." />
 <meta property="og:site_name" content="Prakash Pandey" />
 
         <link rel="shortcut icon" href="https://prakashpandey.in/theme/img/favicon.ico">
@@ -49,22 +49,22 @@
         </header>
 
 
-            <span class="post-meta"><time datetime="2015-07-31T16:46:00+02:00">31 Jul 2015</time> on <a href="tag/prakash.html">prakash</a>, </span>
+            <span class="post-meta"><time datetime="2016-03-10T13:00:00+01:00">10 Mar 2016</time> on <a href="tag/github.html">github</a>, <a href="tag/slack.html">slack</a>, <a href="tag/git.html">git</a>, <a href="tag/python.html">python</a>, </span>
 
-            <h1 class="post-title">Hello World!</h1>
+            <h1 class="post-title">Pushing github commit stats to slack</h1>
 
             <section class="post-content">
-            	<h1>Who are you?</h1>
-<p>Hello! I'm Prakash. I am a programmer currently working at <a href="https://fulfil.io">Fulfil.IO</a> where I work on an open source business application platform <a href="http://tryton.org">Tryton</a>. I have 2-3 year experience with business softwares, mostly open source. And yes, I am FOSS lover.</p>
-<p>And now it's me below -</p>
-<p><img alt="Prakash Pandey" src="https://farm1.staticflickr.com/326/20056811079_2e5609ab59_h.jpg" /></p>
-<h1>Why are you blogging?</h1>
-<p>Well! from very long time I was thinking to write blogs but couldn't manage my time to do so. Initially I started on blogger, but I hated the interface. This time I wrote my own blogging system(was fun).</p>
-<p>Yes, I am not very good in writing, my grammar sucks! But you know practice makes a man perfect and a quote by C. J. Cherryh: <em>It is perfectly okay to write garbage—as long as you edit brilliantly</em>, gave me some confidence to go ahead :)</p>
-<h1>What will you be blogging about?</h1>
-<p>Most of my blogs will be based on computer programming and related area, but I will also be sharing my life experiences and some random thoughts.</p>
-<h1>How I can leave feedback?</h1>
-<p>Right now there is no comments section available, but you can always send your feedback <a href="mailto:howdy@prakashpandey.in">here</a>. I will be very happy to hear your feedback.</p>
+            	<p>It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github for code management. 50 commits everyday is an average. Except the regular planned task, we were not able to get much insights on where developers spend time. Because github is the final destination to every single task, so we thought of measuring that.</p>
+<p>We wrote a script to fetch all last day commits from github and push them to slack #dev channel. Every morning 6 AM it pushes all the commits by person and repository.</p>
+<p><img alt="Github commits on Slack" src="https://prakashpandey.in/images/github-stats-pushed-to-slack.png" /></p>
+<h1>Where this help?</h1>
+<ul>
+<li>To see what all happened in engineering last day</li>
+<li>What all repository got updates. This is really helpful to see where the focus going on.</li>
+<li>To encourage devs to do more commits ;)</li>
+</ul>
+<h1>Where is the sample code?</h1>
+<p>I have uploaded this to a <a href="https://gist.github.com/prakashpp/02ee9bc08dad2321c2dd">github gist</a>. Feel free to ask, comment if you have more questions.</p>
             </section>
 
             <footer class="post-footer">
@@ -80,15 +80,15 @@
 
                 <section class="share">
                     <h4>Share this post</h4>
-                    <a class="icon-twitter" href="https://twitter.com/share?text=Hello World!&amp;url=https://prakashpandey.in/2015/Jul/31/hello-world.html"
+                    <a class="icon-twitter" href="https://twitter.com/share?text=Pushing github commit stats to slack&amp;url=https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html"
                         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                         <span class="hidden">Twitter</span>
                     </a>
-                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://prakashpandey.in/2015/Jul/31/hello-world.html"
+                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html"
                         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                         <span class="hidden">Facebook</span>
                     </a>
-                    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://prakashpandey.in/2015/Jul/31/hello-world.html"
+                    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html"
                        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                         <span class="hidden">Google+</span>
                     </a>
@@ -134,9 +134,9 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "name": "Hello World!",
-  "headline": "Hello World!",
-  "datePublished": "2015-07-31 16:46:00+02:00",
+  "name": "Pushing github commit stats to slack",
+  "headline": "Pushing github commit stats to slack",
+  "datePublished": "2016-03-10 13:00:00+01:00",
   "dateModified": "",
   "author": {
     "@type": "Person",
@@ -144,8 +144,8 @@
     "url": "https://prakashpandey.in"
   },
   "image": "https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0",
-  "url": "https://prakashpandey.in/2015/Jul/31/hello-world.html",
-  "description": "Hello! I'm Prakash. I am a programmer currently working at Fulfil.IO where I work on an open source business application platform Tryton. I have 2-3 year experience with business softwares, mostly open source..."
+  "url": "https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html",
+  "description": "It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github..."
 }
 </script>
     </body>

@@ -2,27 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>http://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html</loc>
+    <loc>https://prakashpandey.in/2017/Feb/17/http-mocking-was-never-easy-before.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html</loc>
+    <loc>https://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://prakashpandey.in/2015/Aug/06/load-testing-with-locust.html</loc>
+    <loc>https://prakashpandey.in/2015/Sep/13/dockerize-wkhtmltopdf-http-service.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://prakashpandey.in/2015/Aug/03/encrypted-field-in-tryton.html</loc>
+    <loc>https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://prakashpandey.in/2015/Jul/31/hello-world.html</loc>
+    <loc>https://prakashpandey.in/2015/Aug/06/writing-your-first-tryton-module.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prakashpandey.in/2015/Aug/06/load-testing-with-locust.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prakashpandey.in/2015/Aug/03/encrypted-field-in-tryton.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prakashpandey.in/2015/Jul/31/hello-world.html</loc>
     <priority>0.8</priority>
   </url>
 

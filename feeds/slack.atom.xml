@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Prakash Pandey</title><link href="http://prakashpandey.in/" rel="alternate"></link><link href="http://prakashpandey.in/feeds/slack.atom.xml" rel="self"></link><id>http://prakashpandey.in/</id><updated>2016-03-10T13:00:00+01:00</updated><entry><title>Pushing github commit stats to slack</title><link href="http://prakashpandey.in/2016/Mar/10/pushing-github-commit-stats-to-slack.html" rel="alternate"></link><updated>2016-03-10T13:00:00+01:00</updated><author><name>Prakash Pandey</name></author><id>tag:prakashpandey.in,2016-03-10:2016/Mar/10/pushing-github-commit-stats-to-slack.html</id><summary type="html">&lt;p&gt;It all started with showing metrics. What every dev work on last day? How are they performing and so on. We are heavily dependent on github for code management. 50 commits everyday is an average. Except the regular planned task, we were not able to get much insights on where developers spend time. Because github is the final destination to every single task, so we thought of measuring that.&lt;/p&gt;
+&lt;p&gt;We wrote a script to fetch all last day commits from github and push them to slack #dev channel. Every morning 6 AM it pushes all the commits by person and repository.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Github commits on Slack" src="http://prakashpandey.in/images/github-stats-pushed-to-slack.png" /&gt;&lt;/p&gt;
+&lt;h1&gt;Where this help?&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;To see what all happened in engineering last day&lt;/li&gt;
+&lt;li&gt;What all repository got updates. This is really helpful to see where the focus going on.&lt;/li&gt;
+&lt;li&gt;To encourage devs to do more commits ;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Where is the sample code?&lt;/h1&gt;
+&lt;p&gt;I have uploaded this to a &lt;a href="https://gist.github.com/prakashpp/02ee9bc08dad2321c2dd"&gt;github gist&lt;/a&gt;. Feel free to ask, comment if you have more questions.&lt;/p&gt;</summary><category term="github"></category><category term="slack"></category><category term="git"></category><category term="python"></category></entry></feed>

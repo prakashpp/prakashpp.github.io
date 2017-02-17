@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,12 +11,29 @@
 <meta name="tags" content="SOAP, python, suds, "/>
 <meta name="date" content="13 Aug 2015"/>
 <meta name="category" content="python"/>
-<meta name="summary" content="<p>Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard...</p>"/>
+<meta name="summary" content="Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard..."/>
+<meta name="description" content="Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard..."/>
 
-        <link rel="shortcut icon" href="http://prakashpandey.in/theme/img/favicon.ico">
-        <link href="http://prakashpandey.in/theme/css/screen.css" rel="stylesheet">
-        <link href="http://prakashpandey.in/theme/css/font.css" rel="stylesheet">
-        <link href="http://prakashpandey.in/theme/css/highlight.css" rel="stylesheet">
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard...">
+<meta name="twitter:site" content="@prkshpp">
+<meta name="twitter:title" content="Access SOAP web services using python suds">
+<meta name="twitter:description" content="Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard...">
+<meta name="twitter:creator" content="@prkshpp">
+<meta name="twitter:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Access SOAP web services using python suds"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:url" content="https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"/>
+<meta property="og:image" content="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" />
+<meta property="og:description" content="Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard..." />
+<meta property="og:site_name" content="Prakash Pandey" />
+
+        <link rel="shortcut icon" href="https://prakashpandey.in/theme/img/favicon.ico">
+        <link href="https://prakashpandey.in/theme/css/screen.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/font.css" rel="stylesheet">
+        <link href="https://prakashpandey.in/theme/css/highlight.css" rel="stylesheet">
     </head>
 
     <body class="post-template">
@@ -27,7 +44,7 @@
     <article class="post">
 
         <header class="post-header">
-            <a class="blog-logo" href="/"><img src="https://secure.gravatar.com/avatar/a153aa8e81b37f14ef1016672c2fd22a?s=100" alt="Blog Logo" />
+            <a class="blog-logo" href="/"><img src="https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0" height="120" width="120" alt="Blog Logo" />
             </a>
         </header>
 
@@ -122,15 +139,15 @@ Service <span class="o">(</span> GeoIPService <span class="o">)</span> <span cla
 
                 <section class="share">
                     <h4>Share this post</h4>
-                    <a class="icon-twitter" href="https://twitter.com/share?text=Access SOAP web services using python suds&amp;url=http://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
+                    <a class="icon-twitter" href="https://twitter.com/share?text=Access SOAP web services using python suds&amp;url=https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
                         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                         <span class="hidden">Twitter</span>
                     </a>
-                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
+                    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
                         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                         <span class="hidden">Facebook</span>
                     </a>
-                    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
+                    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html"
                        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                         <span class="hidden">Google+</span>
                     </a>
@@ -145,15 +162,15 @@ Service <span class="o">(</span> GeoIPService <span class="o">)</span> <span cla
 
 
             <footer class="site-footer">
-                <a class="subscribe icon-feed" href="#"><span class="tooltip">Subscribe!</span></a>
+                <a class="subscribe icon-feed" href="https://prakashpandey.in/feeds/all.atom.xml"><span class="tooltip">Subscribe!</span></a>
                 <div class="inner">
-                     <section class="poweredby">Powered by <a href="http://blog.getpelican.com/">Pelican</a></section>
+                     <section class="poweredby">Powered by <a href="https://blog.getpelican.com/">Pelican</a></section>
                 </div>
             </footer>
 
-            <script type="text/javascript" src="http://prakashpandey.in/theme/js/jquery.min.js"></script>
-            <script type="text/javascript" src="http://prakashpandey.in/theme/js/jquery.fitvids.js"></script>
-            <script type="text/javascript" src="http://prakashpandey.in/theme/js/index.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.min.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/jquery.fitvids.js"></script>
+            <script type="text/javascript" src="https://prakashpandey.in/theme/js/index.js"></script>
             <script>
                   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -163,7 +180,7 @@ Service <span class="o">(</span> GeoIPService <span class="o">)</span> <span cla
                   ga('send', 'pageview');
             </script>
 
-<script type="text/javascript" src="http://prakashpandey.in/theme/js/highlight.js"></script>
+<script type="text/javascript" src="https://prakashpandey.in/theme/js/highlight.js"></script>
 <script>
   $(document).ready(function() {
     $('div.highlight pre').each(function(i, block) {
@@ -172,5 +189,23 @@ Service <span class="o">(</span> GeoIPService <span class="o">)</span> <span cla
   });
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Access SOAP web services using python suds",
+  "headline": "Access SOAP web services using python suds",
+  "datePublished": "2015-08-13 02:02:00+02:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Prakash Pandey",
+    "url": "https://prakashpandey.in"
+  },
+  "image": "https://dl.dropboxusercontent.com/s/u5ocljy6kc71a3l/blog-profile.jpg?dl=0",
+  "url": "https://prakashpandey.in/2015/Aug/13/access-soap-web-services-using-python-suds.html",
+  "description": "Last week I worked on tryton integration with FedEx shipping. FedEx implements SOAP communication interface, that means sending SOAP requests from python to FedEx server. During the course I gave up on py-fedex api just because it was getting hard..."
+}
+</script>
     </body>
 </html>
